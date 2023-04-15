@@ -26,6 +26,7 @@ public class SignupOne extends JFrame implements ActionListener {
     JRadioButton unMarried,married,feMale,male;
     ButtonGroup marriedGroup,gendergroup;
     JButton next;
+    
 
     SignupOne(){
     setTitle("Application Form");
@@ -258,7 +259,7 @@ public class SignupOne extends JFrame implements ActionListener {
                         String query = "insert into signup values('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+pincode+"','"+state+"')";
                         c.s.executeUpdate(query);
                         setVisible(false);
-                        new SignupTwo(); 
+                        new SignupTwo(formno); 
                     }
 
         } catch (Exception e) {
