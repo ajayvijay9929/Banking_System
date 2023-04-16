@@ -31,7 +31,6 @@ public class SignupTwo extends JFrame implements ActionListener {
 
     SignupTwo(String fno) {
         this.fno = fno;
-        // this.random=random;
         setTitle("Account Opening Application Form");
         setLayout(null);
 
@@ -223,6 +222,8 @@ public class SignupTwo extends JFrame implements ActionListener {
             Conn c=new Conn();
             String query = "insert into signupTwo values('"+fno+"','"+religion+"','"+category+"','"+income+"','"+eQualification+"','"+occupation+"','"+panNo+"','"+aadharNo+"','"+sc+"','"+ea+"')";
             c.s.executeUpdate(query);
+            setVisible(false);
+            new SignupThree(fno);
             }
 
         } catch (Exception e) {
