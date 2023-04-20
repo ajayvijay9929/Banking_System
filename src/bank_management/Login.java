@@ -1,9 +1,11 @@
 package bank_management;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 public class Login extends JFrame implements ActionListener{
     JButton signUp,clear,login;
@@ -78,29 +80,44 @@ public class Login extends JFrame implements ActionListener{
         setVisible(true);
         setLocation(300,200);
     }
-
-
-    public static void main(String[] args) {
-        new Login();
-    }
-
-
-
+    
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == clear) {
             userNameField.setText("");
             passwordField.setText("");
         }
-
+        
         else if(e.getSource() == login){
-
+            Conn con = new Conn();
+            String username=userNameField.getText();
+            String password=passwordField.getText();
+            String query = "select * from login where userName = '"+username+"' and password = '"+password+"' ";
+            
+            try {
+                ResultSet rs= con.s.executeQuery(query);
+                if(rs.next()){
+                    setVisible(false);
+                    new Transactions(username,password);
+                } else{
+                    JOptionPane.showMessageDialog(null, "Enter Correct Username And Password");
+                }
+            } catch (Exception ee) {
+                System.out.println(ee);
+            }
         }
         else if(e.getSource() == signUp){
-                    setVisible(false);
-                    new SignupOne();
+            setVisible(false);
+            new SignupOne();
         }
-
+        
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
+    
+    
+        public static void main(String[] args) {
+            new Login();
+        }
 }

@@ -26,13 +26,18 @@ public class SignupOne extends JFrame implements ActionListener {
     JRadioButton unMarried,married,feMale,male;
     ButtonGroup marriedGroup,gendergroup;
     JButton next;
+    long AccountNumber;
+    String acnumber;
     
 
     SignupOne(){
     setTitle("Application Form");
         setLayout(null);
-        Random ran =new Random();
-        random = Math.abs((ran.nextLong() % 9000L) + 1000L);
+
+        GRNumber grn=new GRNumber();
+        AccountNumber= grn.randomNumberGenerate();
+        System.out.println(AccountNumber);
+        acnumber=Long.toString(AccountNumber);
         
         formno = new JLabel("Application No. " + random);
         formno.setFont(new Font("Raleway", Font.BOLD, 32));
@@ -256,10 +261,10 @@ public class SignupOne extends JFrame implements ActionListener {
                     
                     else {
                         Conn c=new Conn();
-                        String query = "insert into signup values('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+pincode+"','"+state+"')";
+                        String query = "insert into signup values('"+formno+"','"+AccountNumber+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+pincode+"','"+state+"')";
                         c.s.executeUpdate(query);
                         setVisible(false);
-                        new SignupTwo(formno); 
+                        new SignupTwo(formno,acnumber); 
                     }
 
         } catch (Exception e) {

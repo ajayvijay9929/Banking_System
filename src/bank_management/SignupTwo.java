@@ -27,10 +27,11 @@ public class SignupTwo extends JFrame implements ActionListener {
     ButtonGroup eagroup, scgroup;
     JButton next;
     JComboBox religionBox, categoryBox, incomeBox, eqBox, occupationBox;
-    String fno;
+    String fno,AccountNumber;
 
-    SignupTwo(String fno) {
+    SignupTwo(String fno,String AccountNumber) {
         this.fno = fno;
+        this.AccountNumber = AccountNumber;
         setTitle("Account Opening Application Form");
         setLayout(null);
 
@@ -176,10 +177,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-        new SignupTwo("");
-    }
-
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
 
@@ -190,6 +188,8 @@ public class SignupTwo extends JFrame implements ActionListener {
         String occupation = (String) occupationBox.getSelectedItem();
         String panNo = panTextField.getText();
         String aadharNo = aadharTextField.getText();
+        int plen=panNo.length();
+        int alen=aadharNo.length();
         String sc = null;
         String ea = null;
 
@@ -206,12 +206,12 @@ public class SignupTwo extends JFrame implements ActionListener {
         }
 
         try {
-            if (panNo.equals("")) {
-                JOptionPane.showMessageDialog(null, "Please Enter Your Pan Number ");
+            if (panNo.equals("")|| plen!=10) {
+                JOptionPane.showMessageDialog(null, "Please Enter Valid Pan Number ");
             }
 
-            else if (aadharNo.equals("")) {
-                JOptionPane.showMessageDialog(null, "Please Enter Your Aadhar Number ");
+            else if (aadharNo.equals("") || alen!=12) {
+                JOptionPane.showMessageDialog(null, "Please Enter Valid Aadhar Number ");
             }
 
             else if (!eaYes.isSelected() && !eaNo.isSelected()) {
@@ -220,15 +220,18 @@ public class SignupTwo extends JFrame implements ActionListener {
 
             else {
             Conn c=new Conn();
-            String query = "insert into signupTwo values('"+fno+"','"+religion+"','"+category+"','"+income+"','"+eQualification+"','"+occupation+"','"+panNo+"','"+aadharNo+"','"+sc+"','"+ea+"')";
+            String query = "insert into signupTwo values('"+fno+"','"+AccountNumber+"','"+religion+"','"+category+"','"+income+"','"+eQualification+"','"+occupation+"','"+panNo+"','"+aadharNo+"','"+sc+"','"+ea+"')";
             c.s.executeUpdate(query);
             setVisible(false);
-            new SignupThree(fno);
+            new SignupThree(fno,AccountNumber);
             }
 
         } catch (Exception e) {
             System.out.println(e);
         }
 
+    }
+    public static void main(String[] args) {
+        new SignupTwo("","");
     }
 }
