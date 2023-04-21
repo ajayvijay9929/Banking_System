@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class accountDetails extends JFrame  {
 
-    accountDetails(String AccountNumber,String name ,String fname,String dob,String gender,String email,String marritalstatus,String city,String state,String pincode,String pan,String aadhar) {
+    accountDetails(String AccountNumber,String name ,String fname,String dob,String gender,String email,String marritalstatus,String city,String state,String pincode,String pan,String aadhar,String facility) {
         setTitle("Account Details");
         setLayout(null);
 
@@ -74,9 +74,28 @@ public class accountDetails extends JFrame  {
         dstate.setFont(new Font("Osword", Font.BOLD, 15));
         dstate.setBounds(30, 320, 400, 50);
         add(dstate);
+        
+        JLabel fac = new JLabel("Services👇:");
+        fac.setFont(new Font("Osword", Font.BOLD, 15));
+        fac.setBounds(30, 340, 400, 50);
+        add(fac);
+        
+        JLabel fac1 = new JLabel(facility);
+        fac1.setFont(new Font("Osword", Font.BOLD, 10));
+        fac1.setBounds(30, 380, 500, 50);
+        add(fac1);
+        
+        JLabel profile = new JLabel("Profile Photo😎");
+        profile.setFont(new Font("Osword", Font.BOLD, 15));
+        profile.setBounds(350, 100, 150, 50);
+        add(profile);
+        
+        JLabel sig = new JLabel("Signature 🔻");
+        sig.setFont(new Font("Osword", Font.BOLD, 15));
+        sig.setBounds(350, 280, 150, 50);
+        add(sig);
 
-
-        setSize(500, 500);
+        setSize(550, 500);
         setVisible(true);
         setLocation(500, 150);
         getContentPane().setBackground(Color.white);
@@ -85,7 +104,7 @@ public class accountDetails extends JFrame  {
 
 
     public static void main(String[] args) {
-        new accountDetails("","","","","","","","","","","","");
+        new accountDetails("","","","","","","","","","","","","");
     }
 
 }

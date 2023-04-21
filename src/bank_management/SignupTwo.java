@@ -1,4 +1,3 @@
-
 package bank_management;
 
 import java.awt.Color;
@@ -27,9 +26,9 @@ public class SignupTwo extends JFrame implements ActionListener {
     ButtonGroup eagroup, scgroup;
     JButton next;
     JComboBox religionBox, categoryBox, incomeBox, eqBox, occupationBox;
-    String fno,AccountNumber;
+    String fno, AccountNumber;
 
-    SignupTwo(String fno,String AccountNumber) {
+    SignupTwo(String fno, String AccountNumber) {
         this.fno = fno;
         this.AccountNumber = AccountNumber;
         setTitle("Account Opening Application Form");
@@ -177,7 +176,6 @@ public class SignupTwo extends JFrame implements ActionListener {
 
     }
 
-    
     @Override
     public void actionPerformed(ActionEvent ae) {
 
@@ -188,8 +186,8 @@ public class SignupTwo extends JFrame implements ActionListener {
         String occupation = (String) occupationBox.getSelectedItem();
         String panNo = panTextField.getText();
         String aadharNo = aadharTextField.getText();
-        int plen=panNo.length();
-        int alen=aadharNo.length();
+        int plen = panNo.length();
+        int alen = aadharNo.length();
         String sc = null;
         String ea = null;
 
@@ -206,11 +204,11 @@ public class SignupTwo extends JFrame implements ActionListener {
         }
 
         try {
-            if (panNo.equals("")|| plen!=10) {
+            if (panNo.equals("") || plen != 10) {
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Pan Number ");
             }
 
-            else if (aadharNo.equals("") || alen!=12) {
+            else if (aadharNo.equals("") || alen != 12) {
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Aadhar Number ");
             }
 
@@ -219,11 +217,13 @@ public class SignupTwo extends JFrame implements ActionListener {
             }
 
             else {
-            Conn c=new Conn();
-            String query = "insert into signupTwo values('"+fno+"','"+AccountNumber+"','"+religion+"','"+category+"','"+income+"','"+eQualification+"','"+occupation+"','"+panNo+"','"+aadharNo+"','"+sc+"','"+ea+"')";
-            c.s.executeUpdate(query);
-            setVisible(false);
-            new SignupThree(fno,AccountNumber);
+                Conn c = new Conn();
+                String query = "insert into signupTwo values('" + fno + "','" + AccountNumber + "','" + religion + "','"
+                        + category + "','" + income + "','" + eQualification + "','" + occupation + "','" + panNo
+                        + "','" + aadharNo + "','" + sc + "','" + ea + "')";
+                c.s.executeUpdate(query);
+                setVisible(false);
+                new SignupThree(fno, AccountNumber);
             }
 
         } catch (Exception e) {
@@ -231,7 +231,8 @@ public class SignupTwo extends JFrame implements ActionListener {
         }
 
     }
+
     public static void main(String[] args) {
-        new SignupTwo("","");
+        new SignupTwo("", "");
     }
 }

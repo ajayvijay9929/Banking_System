@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 
 public class Transactions extends JFrame implements ActionListener {
     
-    String AccountNumber,name ,fname,dob,gender,email,marritalstatus,city,state,pincode,pan,aadhar;
+    String AccountNumber,facility,name ,fname,dob,gender,email,marritalstatus,city,state,pincode,pan,aadhar;
     JButton changePin, accountdetails;
     String password, username;
 
@@ -71,6 +71,8 @@ public class Transactions extends JFrame implements ActionListener {
                 ResultSet ars = conn.s.executeQuery("select * from signupThree where  UserName = '" + username + "'");
                 while(ars.next()){
                     AccountNumber=ars.getString("AccountNumber");
+                    facility=ars.getString("Facility");
+
                 }
                 
                 Conn connn = new Conn();
@@ -94,7 +96,7 @@ public class Transactions extends JFrame implements ActionListener {
                     aadhar=aprs.getString("aadharNo");
                     String input = JOptionPane.showInputDialog(null, "Please Enter The Password:");
                     if(password.equals(input)){
-                    new accountDetails(AccountNumber,name ,fname,dob,gender,email,marritalstatus,city,state,pincode,pan,aadhar);
+                    new accountDetails(AccountNumber,name ,fname,dob,gender,email,marritalstatus,city,state,pincode,pan,aadhar,facility);
                     
                 }
             else {
