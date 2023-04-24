@@ -41,6 +41,9 @@ public class SignupOne extends JFrame implements ActionListener {
         System.out.println(AccountNumber);
         acnumber = Long.toString(AccountNumber);
 
+        Random ran = new Random();
+        random = Math.abs((ran.nextLong() % 1285L) + 10000L);
+
         formno = new JLabel("Application No. " + random);
         formno.setFont(new Font("Raleway", Font.BOLD, 32));
         formno.setBounds(250, 40, 400, 40);

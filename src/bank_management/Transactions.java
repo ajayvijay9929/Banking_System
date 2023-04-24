@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
 public class Transactions extends JFrame implements ActionListener {
-    
-    String AccountNumber,facility,name ,fname,dob,gender,email,marritalstatus,city,state,pincode,pan,aadhar;
-    JButton changePin, accountdetails;
+
+    String AccountNumber, facility, name, fname, dob, gender, email, marritalstatus, city, state, pincode, pan, aadhar;
+    JButton changePin, accountdetails, pay;
     String password, username;
 
     Transactions(String username, String password) {
@@ -55,6 +55,14 @@ public class Transactions extends JFrame implements ActionListener {
         history.setBounds(100, 300, 160, 40);
         add(history);
 
+        pay = new JButton("Quick Pay");
+        pay.setBackground(Color.black);
+        pay.setForeground(Color.white);
+        pay.setFont(new Font("Ralway", Font.BOLD, 20));
+        pay.setBounds(100, 350, 160, 35);
+        pay.addActionListener(this);
+        add(pay);
+
         setSize(1300, 820);
         setLocation(130, 0);
         getContentPane().setBackground(Color.white);
@@ -65,46 +73,50 @@ public class Transactions extends JFrame implements ActionListener {
         if (ae.getSource() == changePin) {
             setVisible(false);
             new PinChange(username, password);
+        } else if (ae.getSource() == pay) {
+            setVisible(false);
+            new QuickPay(AccountNumber, password);
         } else if (ae.getSource() == accountdetails) {
             try {
                 Conn conn = new Conn();
                 ResultSet ars = conn.s.executeQuery("select * from signupThree where  UserName = '" + username + "'");
-                while(ars.next()){
-                    AccountNumber=ars.getString("AccountNumber");
-                    facility=ars.getString("Facility");
+                while (ars.next()) {
+                    AccountNumber = ars.getString("AccountNumber");
+                    facility = ars.getString("Facility");
 
                 }
-                
+
                 Conn connn = new Conn();
-                ResultSet rs = connn.s.executeQuery("select * from signup where AccountNumber = '" + AccountNumber + "'");
-                while(rs.next()){
-                    name=rs.getString("Name");
-                    fname=rs.getString("Father_name"); 
-                    dob=rs.getString("DOB");
-                    gender=rs.getString("Gender");
-                    email=rs.getString("Email");
-                    marritalstatus=rs.getString("Married_Status");
-                    city=rs.getString("City");
-                    state=rs.getString("Pincode");
-                    pincode=rs.getString("State");
+                ResultSet rs = connn.s
+                        .executeQuery("select * from signup where AccountNumber = '" + AccountNumber + "'");
+                while (rs.next()) {
+                    name = rs.getString("Name");
+                    fname = rs.getString("Father_name");
+                    dob = rs.getString("DOB");
+                    gender = rs.getString("Gender");
+                    email = rs.getString("Email");
+                    marritalstatus = rs.getString("Married_Status");
+                    city = rs.getString("City");
+                    state = rs.getString("Pincode");
+                    pincode = rs.getString("State");
                 }
-                
+
                 Conn connnn = new Conn();
-                ResultSet aprs = connnn.s.executeQuery("select * from signupTwo where AccountNumber = '" + AccountNumber + "'");
-                while(aprs.next()){
-                    pan=aprs.getString("panNo");
-                    aadhar=aprs.getString("aadharNo");
+                ResultSet aprs = connnn.s
+                        .executeQuery("select * from signupTwo where AccountNumber = '" + AccountNumber + "'");
+                while (aprs.next()) {
+                    pan = aprs.getString("panNo");
+                    aadhar = aprs.getString("aadharNo");
                     String input = JOptionPane.showInputDialog(null, "Please Enter The Password:");
-                    if(password.equals(input)){
-                    new accountDetails(AccountNumber,name ,fname,dob,gender,email,marritalstatus,city,state,pincode,pan,aadhar,facility);
-                    
+                    if (password.equals(input)) {
+                        new accountDetails(AccountNumber, name, fname, dob, gender, email, marritalstatus, city, state,
+                                pincode, pan, aadhar, facility);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Incorrect Password");
+
+                    }
                 }
-            else {
-                JOptionPane.showMessageDialog(null,"Incorrect Password");
-
-            }
-            }
-
 
             } catch (Exception e) {
                 System.out.println(e);

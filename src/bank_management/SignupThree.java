@@ -12,15 +12,14 @@ public class SignupThree extends JFrame implements ActionListener {
 
     JRadioButton b1, b2, b3, b4;
     JTextField passwordTextField, userTextField;
-    String formNo,AccountNumber;
+    String formNo, AccountNumber;
     JCheckBox tac, c1, c2, c4, c3, c5, c6;
 
-    SignupThree(String fno,String AccountNumber) {
+    SignupThree(String fno, String AccountNumber) {
         formNo = fno;
         this.AccountNumber = AccountNumber;
         setTitle("Account Opening Application Form");
         setLayout(null);
-
 
         JLabel title = new JLabel("Page 3: Account Details ");
         title.setFont(new Font("Raleway", Font.BOLD, 22));
@@ -146,8 +145,6 @@ public class SignupThree extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ea) {
 
-
-
         String accountType = null;
         if (b1.isSelected()) {
             accountType = "Saving Account";
@@ -197,16 +194,18 @@ public class SignupThree extends JFrame implements ActionListener {
             } else if (!tac.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Please Check Term And Conditions");
             } else {
-                
+
                 Conn conn = new Conn();
-                String quary1 = "insert into signupThree values('" + formNo + "','"+AccountNumber+"','" + username + "','" + password + "','" + accountType + "','" + facility + "')";
+                String quary1 = "insert into signupThree values('" + formNo + "','" + AccountNumber + "','" + username
+                        + "','" + password + "','" + accountType + "','" + facility + "')";
                 conn.s.executeUpdate(quary1);
-                String quary2 = "insert into login values('" + formNo + "','"+AccountNumber+"','" + username + "','" + password + "')";
+                String quary2 = "insert into login values('" + AccountNumber + "','" + username + "','" + password
+                        + "')";
                 conn.s.executeUpdate(quary2);
                 setVisible(false);
                 JOptionPane.showMessageDialog(null, "Your Application Submited");
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "UserName Not Available");
             System.out.println(e);
@@ -214,9 +213,7 @@ public class SignupThree extends JFrame implements ActionListener {
 
     }
 
-    
-
     public static void main(String[] args) {
-        new SignupThree("","");
+        new SignupThree("", "");
     }
 }
