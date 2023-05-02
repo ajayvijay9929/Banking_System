@@ -98,7 +98,7 @@ public class QuickPay extends JFrame implements ActionListener {
             int count = 0;
 
             if (ureacno.length() != 11) {
-                JOptionPane.showMessageDialog(n ull, "Please Enter Valid Account Number");
+                JOptionPane.showMessageDialog(null, "Please Enter Valid Account Number");
                 return;
             }
 
@@ -198,3 +198,4 @@ public class QuickPay extends JFrame implements ActionListener {
     public static void main(String[] args) {
         new QuickPay("", "");
     }
+}

@@ -42,7 +42,8 @@ public class SignupOne extends JFrame implements ActionListener {
         acnumber = Long.toString(AccountNumber);
 
         Random ran = new Random();
-        random = Math.abs((ran.nextLong() % 1285L) + 10000L);
+        random = Math.abs((ran.nextLong() % 9000L) + 1000L);
+        System.out.println(random);
 
         formno = new JLabel("Application No. " + random);
         formno.setFont(new Font("Raleway", Font.BOLD, 32));
@@ -194,10 +195,6 @@ public class SignupOne extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-        new SignupOne();
-    }
-
     @Override
     public void actionPerformed(ActionEvent ae) {
 
@@ -280,5 +277,9 @@ public class SignupOne extends JFrame implements ActionListener {
             System.out.println(e);
         }
 
+    }
+
+    public static void main(String[] args) {
+        new SignupOne();
     }
 }
