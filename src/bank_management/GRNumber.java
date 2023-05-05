@@ -10,32 +10,29 @@ public class GRNumber {
 
     public long randomNumberGenerate() {
         Random ran = new Random();
-        AccountNumber = Math.abs((long) (ran.nextDouble() % 90000000000L) + 10000000000L);
-        System.out.println(AccountNumber);
+        AccountNumber = 10000000000L + ((long) (ran.nextDouble() * 90000000000L));
         long longacNumber;
         Conn conn = new Conn();
         String query = "select * from signupThree where AccountNumber = '" + AccountNumber + "'";
         try {
             ResultSet rs = conn.s.executeQuery(query);
-            System.out.println("quary");
             stringacNumber = rs.getString("AccountNumber");
             longacNumber = Long.parseLong(stringacNumber);
-            String sacnumber = Long.toString(AccountNumber);
-            if (stringacNumber.equals(sacnumber)) {
-                randomNumberGenerate();
-                System.out.println("if");
-            }
-            // if (longacNumber == AccountNumber) {
-            // randomNumberGenerate();
-            // }
-            else {
-                System.out.println("else");
-                return AccountNumber;
-            }
+            // String sacnumber = Long.toString(AccountNumber);
         } catch (Exception ee) {
             System.out.println(ee);
         }
-        System.out.println(stringacNumber);
+
+        // if (stringacNumber.equals(sacnumber)) {
+        // randomNumberGenerate();
+        // System.out.println("if");
+        // }
+        // else {
+        // System.out.println("else");
+        // return AccountNumber;
+        // }
+        // System.out.println(stringacNumber);
+
         return AccountNumber;
     }
 

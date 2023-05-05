@@ -112,12 +112,12 @@ public class Transactions extends JFrame implements ActionListener {
                         new accountDetails(AccountNumber, name, fname, dob, gender, email, marritalstatus, city, state,
                                 pincode, pan, aadhar, facility);
 
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Incorrect Password");
-
+                    }
+                    if ( !password.equals(input) ) {
+                         JOptionPane.showMessageDialog(null, "Incorrect Password");
                     }
                 }
-
+                
             } catch (Exception e) {
                 System.out.println(e);
             }

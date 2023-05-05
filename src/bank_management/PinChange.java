@@ -10,7 +10,7 @@ import javax.swing.*;
 public class PinChange extends JFrame implements ActionListener {
 
     JButton back, change;
-    JTextField repintextfield, pintextfield,oldpasswordtextfield;
+    JPasswordField repintextfield, pintextfield,oldpasswordtextfield;
     String oldpassword,username;
     PinChange(String username,String oldpassword) {
 
@@ -20,50 +20,50 @@ public class PinChange extends JFrame implements ActionListener {
         setLayout(null);
 
         JLabel oldpintext = new JLabel("Enter Old Password");
-        oldpintext.setBounds(165, 240, 200, 25);
+        oldpintext.setBounds(165, 240, 300, 25);
         oldpintext.setFont(new Font("System", Font.BOLD, 25));
         add(oldpintext);
 
-        oldpasswordtextfield = new JTextField();
-        oldpasswordtextfield.setBounds(455, 240, 100, 25);
-        oldpasswordtextfield.setFont(new Font("System", Font.BOLD, 25));
+        oldpasswordtextfield = new JPasswordField();
+        oldpasswordtextfield.setBounds(470, 240, 200, 25);
+        oldpasswordtextfield.setFont(new Font("System", Font.BOLD, 20));
         add(oldpasswordtextfield);
 
         JLabel pintext = new JLabel("New Password");
-        pintext.setBounds(165, 320, 100, 25);
+        pintext.setBounds(165, 320, 300, 25);
         pintext.setFont(new Font("System", Font.BOLD, 25));
         add(pintext);
 
-        pintextfield = new JTextField();
-        pintextfield.setBounds(455, 320, 150, 25);
-        pintextfield.setFont(new Font("System", Font.BOLD, 25));
+        pintextfield = new JPasswordField();
+        pintextfield.setBounds(470, 320, 200, 25);
+        pintextfield.setFont(new Font("System", Font.BOLD, 20));
         add(pintextfield);
 
         JLabel repintext = new JLabel("Re-Enter New Password");
-        repintext.setBounds(165, 400, 250, 25);
+        repintext.setBounds(165, 400, 300, 25);
         repintext.setFont(new Font("System", Font.BOLD, 25));
         add(repintext);
 
-        repintextfield = new JTextField();
-        repintextfield.setBounds(455, 400, 150, 25);
-        repintextfield.setFont(new Font("System", Font.BOLD, 25));
+        repintextfield = new JPasswordField();
+        repintextfield.setBounds(470, 400, 200, 25);
+        repintextfield.setFont(new Font("System", Font.BOLD, 20));
         add(repintextfield);
 
         change = new JButton("CHANGE");
-        change.setBounds(400, 450, 100, 30);
+        change.setBounds(470, 470, 100, 30);
         change.setForeground(Color.white);
         change.setBackground(Color.black);
         change.addActionListener(this);
         add(change);
 
         back = new JButton("BACK");
-        back.setBounds(510, 450, 100, 30);
+        back.setBounds(570, 470, 100, 30);
         back.setForeground(Color.white);
         back.setBackground(Color.black);
         back.addActionListener(this);
         add(back);
 
-        setSize(1300, 820);
+        setSize(1000, 700);
         setLocation(130, 0);
         getContentPane().setBackground(Color.white);
         setVisible(true);
