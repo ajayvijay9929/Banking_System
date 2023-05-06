@@ -3,12 +3,11 @@ package bank_management;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.StringReader;
 import java.sql.ResultSet;
 
 import javax.swing.*;
 
-import com.mysql.cj.callback.UsernameCallback;
+//import com.mysql.cj.callback.UsernameCallback;
 
 public class QuickPay extends JFrame implements ActionListener {
 

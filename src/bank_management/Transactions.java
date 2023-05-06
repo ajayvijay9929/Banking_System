@@ -10,7 +10,7 @@ public class Transactions extends JFrame implements ActionListener {
 
     String AccountNumber, facility, name, fname, dob, gender, email, marritalstatus, city, state, pincode, pan, aadhar;
     JButton changePin, accountdetails, pay;
-    String password, username;
+    String password, username , passwordString;;
 
     Transactions(String username, String password) {
         this.password = password;
@@ -107,15 +107,25 @@ public class Transactions extends JFrame implements ActionListener {
                 while (aprs.next()) {
                     pan = aprs.getString("panNo");
                     aadhar = aprs.getString("aadharNo");
-                    String input = JOptionPane.showInputDialog(null, "Please Enter The Password:");
-                    if (password.equals(input)) {
-                        new accountDetails(AccountNumber, name, fname, dob, gender, email, marritalstatus, city, state,
-                                pincode, pan, aadhar, facility);
+                    //String input = JOptionPane.showInputDialog(null, "Please Enter The Password:");
+                    JPasswordField passwordField = new JPasswordField();
+                    int option = JOptionPane.showConfirmDialog(null, passwordField, "Enter password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+               
+                    if (option == JOptionPane.OK_OPTION) {
+                        // Get the password as a char array
+                        char[] password = passwordField.getPassword();
+                        // Convert the password to a String
+                         passwordString = new String(password);
+                        if (password.equals(passwordString)) {
+                            new accountDetails(AccountNumber, name, fname, dob, gender, email, marritalstatus, city, state,
+                                    pincode, pan, aadhar, facility);
+    
+                        }
+                        if ( !password.equals(passwordString) ) {
+                             JOptionPane.showMessageDialog(null, "Incorrect Password");
+                        }
+                    }
 
-                    }
-                    if ( !password.equals(input) ) {
-                         JOptionPane.showMessageDialog(null, "Incorrect Password");
-                    }
                 }
                 
             } catch (Exception e) {
