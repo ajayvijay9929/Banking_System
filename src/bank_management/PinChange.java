@@ -11,11 +11,11 @@ public class PinChange extends JFrame implements ActionListener {
 
     JButton back, change;
     JPasswordField repintextfield, pintextfield,oldpasswordtextfield;
-    String oldpassword,username;
-    PinChange(String username,String oldpassword) {
+    String oldpassword,AccountNumber;
+    PinChange(String AccountNumber,String oldpassword) {
 
         this.oldpassword=oldpassword;
-        this.username=username;
+        this.AccountNumber=AccountNumber;
         setTitle("Password Change Page");
         setLayout(null);
 
@@ -77,7 +77,6 @@ public class PinChange extends JFrame implements ActionListener {
                 String newpassword = pintextfield.getText();
                 String rnewpassword = repintextfield.getText();
                 int plen = newpassword.length();
-                System.out.println(uoldpassword + " " + oldpassword);
                 if(!uoldpassword.equals(oldpassword)){
                     JOptionPane.showMessageDialog(null, "Please Enter Correct Old Password");
                     return;
@@ -90,21 +89,21 @@ public class PinChange extends JFrame implements ActionListener {
                     return;
                 }
                 Conn conn =new Conn();
-                String quary1="update login set password = '"+newpassword+"'  where userName='"+username+"'" ;
-                String quary2="update signupThree set password = '"+newpassword+"'  where userName='"+username+"'";
+                String quary1="update login set password = '"+newpassword+"'  where AccountNumber='"+AccountNumber+"'" ;
+                String quary2="update signupThree set password = '"+newpassword+"'  where AccountNumber='"+AccountNumber+"'";
 
                 conn.s.executeUpdate(quary1);
                 conn.s.executeUpdate(quary2);
                 JOptionPane.showMessageDialog(null, "PIN Successfully Changed");
                 setVisible(false);
-                new Transactions(username,newpassword);
+                new Transactions(AccountNumber,newpassword);
 
             } catch (Exception e) {
                 System.out.println(e);
             }
         } else {
             setVisible(false);
-            new Transactions(username,oldpassword);
+            new Transactions(AccountNumber,oldpassword);
         }
     }
 

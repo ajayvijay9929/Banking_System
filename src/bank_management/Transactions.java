@@ -10,11 +10,11 @@ public class Transactions extends JFrame implements ActionListener {
 
     String AccountNumber, facility, name, fname, dob, gender, email, marritalstatus, city, state, pincode, pan, aadhar;
     JButton changePin, accountdetails, pay;
-    String password, username , passwordString;;
+    String password, username, passwordString;;
 
-    Transactions(String username, String password) {
+    Transactions(String AccountNumber, String password) {
+        this.AccountNumber = AccountNumber;
         this.password = password;
-        this.username = username;
         setTitle("Transaction Page");
         setLayout(null);
 
@@ -72,18 +72,16 @@ public class Transactions extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == changePin) {
             setVisible(false);
-            new PinChange(username, password);
+            new PinChange(AccountNumber, password);
         } else if (ae.getSource() == pay) {
-            setVisible(false);
-            new QuickPay(AccountNumber, password);
+                setVisible(false);
+                new QuickPay(AccountNumber, password);
         } else if (ae.getSource() == accountdetails) {
             try {
                 Conn conn = new Conn();
                 ResultSet ars = conn.s.executeQuery("select * from signupThree where  UserName = '" + username + "'");
                 while (ars.next()) {
-                    AccountNumber = ars.getString("AccountNumber");
                     facility = ars.getString("Facility");
-
                 }
 
                 Conn connn = new Conn();
@@ -107,31 +105,38 @@ public class Transactions extends JFrame implements ActionListener {
                 while (aprs.next()) {
                     pan = aprs.getString("panNo");
                     aadhar = aprs.getString("aadharNo");
-                    //String input = JOptionPane.showInputDialog(null, "Please Enter The Password:");
-                    JPasswordField passwordField = new JPasswordField();
-                    int option = JOptionPane.showConfirmDialog(null, passwordField, "Enter password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-               
-                    if (option == JOptionPane.OK_OPTION) {
-                        // Get the password as a char array
-                        char[] password = passwordField.getPassword();
-                        // Convert the password to a String
-                         passwordString = new String(password);
-                        if (password.equals(passwordString)) {
-                            new accountDetails(AccountNumber, name, fname, dob, gender, email, marritalstatus, city, state,
-                                    pincode, pan, aadhar, facility);
-    
-                        }
-                        if ( !password.equals(passwordString) ) {
-                             JOptionPane.showMessageDialog(null, "Incorrect Password");
-                        }
-                    }
 
                 }
-                
+                    if (passwordinputbox(password)) {
+                        new accountDetails(AccountNumber, name, fname, dob, gender, email, marritalstatus, city,
+                                state,
+                                pincode, pan, aadhar, facility);
+                    }
+
+
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
+    }
+
+    boolean passwordinputbox(String password) {
+        JPasswordField passwordField = new JPasswordField();
+        int option = JOptionPane.showConfirmDialog(null, passwordField, "Enter password:",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
+            // Get the password as a char array
+            char[] password1 = passwordField.getPassword();
+            // Convert the password to a String
+            passwordString = new String(password1);
+            if (password.equals(passwordString)) {
+                return true;
+            }
+            if (!password.equals(passwordString)) {
+                JOptionPane.showMessageDialog(null, "Incorrect Password");
+            }
+        }
+        return false;
     }
 
     public static void main(String[] args) {

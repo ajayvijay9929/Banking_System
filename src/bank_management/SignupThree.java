@@ -202,7 +202,7 @@ public class SignupThree extends JFrame implements ActionListener {
                 String quary2 = "insert into login values('" + AccountNumber + "','" + username + "','" + password
                         + "')";
                 conn.s.executeUpdate(quary2);
-                String quary3 = "insert into balance values('" + AccountNumber + "','" + 00 + "','" + ""
+                String quary3 = "insert into balance values('" + AccountNumber + "','" + 1 + "','" + ""
                         + "')";
                 conn.s.executeUpdate(quary3);
                 setVisible(false);

@@ -11,6 +11,7 @@ public class Login extends JFrame implements ActionListener{
     JButton signUp,clear,login;
     JTextField userNameField;
     JPasswordField passwordField;
+    String AccountNumber;
 
 
     Login(){
@@ -91,9 +92,7 @@ public class Login extends JFrame implements ActionListener{
         }
         
         else if(e.getSource() == login){
-            System.out.println("vijay1");
             Conn con = new Conn();
-            System.out.println("vijay2");
             String username=userNameField.getText();
             String password=passwordField.getText();
             String query = "select * from login where userName = '"+username+"' and password = '"+password+"' ";
@@ -101,8 +100,9 @@ public class Login extends JFrame implements ActionListener{
             try {
                 ResultSet rs= con.s.executeQuery(query);
                 if(rs.next()){
+                    AccountNumber = rs.getString("AccountNumber");
                     setVisible(false);
-                    new Transactions(username,password);
+                    new Transactions(AccountNumber,password);
                 } else{
                     JOptionPane.showMessageDialog(null, "Enter Correct Username And Password");
                 }

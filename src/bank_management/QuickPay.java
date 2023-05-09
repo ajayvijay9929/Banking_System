@@ -22,7 +22,7 @@ public class QuickPay extends JFrame implements ActionListener {
     public QuickPay(String AccountNumber, String password) {
         setTitle("Transaction Page");
         setLayout(null);
-        this.AccountNumber = "12121212121";
+        this.AccountNumber = AccountNumber;
         this.password = password;
 
         pageforquickpay = new JLabel("Quick Pay");
@@ -85,14 +85,14 @@ public class QuickPay extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
 
         if (ae.getSource() == cancel) {
-            setVisible(false);
+            setVisible(false);            
             new Transactions(AccountNumber, password);
         }
 
         else if (ae.getSource() == pay) {
+
             ureacno = acnotext.getText();
             amount1 = amounttext.getText();
-            // String amount2 = amount1;
             String remark = remarktext.getText();
             int count = 0;
 
@@ -119,16 +119,14 @@ public class QuickPay extends JFrame implements ActionListener {
                 }
 
                 Conn connn = new Conn();
-                ResultSet arss = connn.s
-                        .executeQuery("select * from balance where  AccountNumber = '" + AccountNumber + "'");
+                ResultSet arss = connn.s.executeQuery("select * from balance where  AccountNumber = '" + AccountNumber + "'");
                 while (arss.next()) {
-                    seacbal = arss.getString("Balance");
+                    seacbal = arss.getString("balance");
 
                 }
-
                 setVisible(false);
                 {
-
+                    
                     paybal = Long.parseLong(amount1);
                     long rebal = Long.parseLong(reacbal);
                     sebal = Long.parseLong(seacbal);

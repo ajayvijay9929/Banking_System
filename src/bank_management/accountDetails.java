@@ -2,17 +2,32 @@ package bank_management;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class accountDetails extends JFrame  {
+    String bal;
 
-    accountDetails(String AccountNumber,String name ,String fname,String dob,String gender,String email,String marritalstatus,String city,String state,String pincode,String pan,String aadhar,String facility) {
+    accountDetails(String AccountNumber,String name ,String fname,String dob,String gender,String email,String marritalstatus,String city,String state,String pincode,String pan,String aadhar,String facility) throws SQLException {
         setTitle("Account Details");
         setLayout(null);
+
+        Conn connn = new Conn();
+        ResultSet arss = connn.s.executeQuery("select * from balance where  AccountNumber = '" + AccountNumber + "'");
+        while (arss.next()) {
+            bal = arss.getString("balance");
+
+        }
 
         JLabel text = new JLabel("Account Deatils");
         text.setFont(new Font("Osword", Font.BOLD, 25)); 
         text.setBounds(150, 20, 200, 50);
         add(text);
+
+        JLabel balance = new JLabel("Balance: " + bal);
+        balance.setFont(new Font("Osword", Font.BOLD, 18)); 
+        balance.setBounds(170, 50, 200, 50);
+        add(balance);
 
         JLabel accountNo = new JLabel("AccountNumber:   " + AccountNumber);
         accountNo.setFont(new Font("Osword", Font.BOLD, 15));
@@ -103,7 +118,7 @@ public class accountDetails extends JFrame  {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         new accountDetails("","","","","","","","","","","","","");
     }
 
