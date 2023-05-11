@@ -24,7 +24,7 @@ public class accountDetails extends JFrame  {
         text.setBounds(150, 20, 200, 50);
         add(text);
 
-        JLabel balance = new JLabel("Balance: " + bal);
+        JLabel balance = new JLabel("Balance: " + bal+" Rs.");
         balance.setFont(new Font("Osword", Font.BOLD, 18)); 
         balance.setBounds(170, 50, 200, 50);
         add(balance);

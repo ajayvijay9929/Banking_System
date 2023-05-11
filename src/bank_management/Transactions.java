@@ -9,8 +9,8 @@ import java.sql.ResultSet;
 public class Transactions extends JFrame implements ActionListener {
 
     String AccountNumber, facility, name, fname, dob, gender, email, marritalstatus, city, state, pincode, pan, aadhar;
-    JButton changePin, accountdetails, pay;
-    String password, username, passwordString;;
+    JButton changePin, accountdetails, pay,logout;
+    String password, passwordString;;
 
     Transactions(String AccountNumber, String password) {
         this.AccountNumber = AccountNumber;
@@ -25,6 +25,14 @@ public class Transactions extends JFrame implements ActionListener {
         accountdetails.setBounds(300, 150, 300, 40);
         accountdetails.addActionListener(this);
         add(accountdetails);
+
+        logout = new JButton("Logout");
+        logout.setBackground(Color.black);
+        logout.setForeground(Color.white);
+        logout.setFont(new Font("Ralway", Font.BOLD, 22));
+        logout.setBounds(300, 200, 300, 40);
+        logout.addActionListener(this);
+        add(logout);
 
         JButton withDrawl = new JButton("Withdrawl");
         withDrawl.setBackground(Color.black);
@@ -72,14 +80,17 @@ public class Transactions extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == changePin) {
             setVisible(false);
-            new PinChange(AccountNumber, password);
+            new PinChange(AccountNumber, password);}
+        if (ae.getSource() == logout) {
+            setVisible(false);
+            new Login();
         } else if (ae.getSource() == pay) {
                 setVisible(false);
                 new QuickPay(AccountNumber, password);
         } else if (ae.getSource() == accountdetails) {
             try {
                 Conn conn = new Conn();
-                ResultSet ars = conn.s.executeQuery("select * from signupThree where  UserName = '" + username + "'");
+                ResultSet ars = conn.s.executeQuery("select * from signupThree where  AccountNumber = '" + AccountNumber + "'");
                 while (ars.next()) {
                     facility = ars.getString("Facility");
                 }
