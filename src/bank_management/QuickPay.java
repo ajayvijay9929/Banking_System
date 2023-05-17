@@ -3,7 +3,10 @@ package bank_management;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
 
@@ -85,8 +88,8 @@ public class QuickPay extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
 
         if (ae.getSource() == cancel) {
-            setVisible(false);            
-            new Transactions(AccountNumber, password);
+            setVisible(false);
+            new Transactions(AccountNumber);
         }
 
         else if (ae.getSource() == pay) {
@@ -119,14 +122,15 @@ public class QuickPay extends JFrame implements ActionListener {
                 }
 
                 Conn connn = new Conn();
-                ResultSet arss = connn.s.executeQuery("select * from balance where  AccountNumber = '" + AccountNumber + "'");
+                ResultSet arss = connn.s
+                        .executeQuery("select * from balance where  AccountNumber = '" + AccountNumber + "'");
                 while (arss.next()) {
                     seacbal = arss.getString("balance");
 
                 }
                 setVisible(false);
                 {
-                    
+
                     paybal = Long.parseLong(amount1);
                     long rebal = Long.parseLong(reacbal);
                     sebal = Long.parseLong(seacbal);
@@ -174,20 +178,39 @@ public class QuickPay extends JFrame implements ActionListener {
 
                 }
 
-                String quary1 = "update balance set balance = '" + redatabaseamount + "' ,remark='" + remark
-                        + "'  where AccountNumber='" + ureacno + "'";
-                String quary2 = "update balance set balance = '" + sedatabaseamount + "' ,remark='" + remark
-                        + "' where AccountNumber='" + AccountNumber + "'";
+                // String quary1 = "update balance set balance = '" + redatabaseamount + "'
+                // ,remark='" + remark
+                // + "' where AccountNumber='" + ureacno + "'";
+                // String quary2 = "update balance set balance = '" + sedatabaseamount + "'
+                // ,remark='" + remark
+                // + "' where AccountNumber='" + AccountNumber + "'";
 
-                conn.s.executeUpdate(quary1);
-                conn.s.executeUpdate(quary2);
+                String query = "UPDATE balance SET balance = CASE " +
+                        "WHEN AccountNumber = '" + ureacno + "' THEN '" + redatabaseamount + "' " +
+                        "WHEN AccountNumber = '" + AccountNumber + "' THEN '" + sedatabaseamount + "' " +
+                        "ELSE balance " +
+                        "END, remark = '" + remark + "' " +
+                        "WHERE AccountNumber = '" + ureacno + "' OR AccountNumber = '" + AccountNumber + "'";
+
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a dd-MMM-yyyy");
+                String dateTime = now.format(formatter);
+                String query1 = "insert into trhistory values('" + AccountNumber + "','" + ureacno + "','" + amount1
+                        + "','" + dateTime + "','debit','" + remark + "'),('" + ureacno + "','" + AccountNumber + "','"
+                        + amount1 + "','" + dateTime + "','cradit','" + remark + "')";
+                // String query2="insert into trhistory values('"+ureacno
+                // +"','"+AccountNumber+"','"+amount1+"','"+dateTime+"','cradit','"+remark
+                // +"')";
+
+                conn.s.executeUpdate(query);
+                conn.s.executeUpdate(query1);
 
             } catch (Exception e) {
                 System.out.println(e);
             }
 
             JOptionPane.showMessageDialog(null, "Pay Successfully");
-            new Transactions(AccountNumber, password);
+            new Transactions(AccountNumber);
 
         }
     }

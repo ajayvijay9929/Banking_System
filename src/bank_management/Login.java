@@ -102,7 +102,7 @@ public class Login extends JFrame implements ActionListener{
                 if(rs.next()){
                     AccountNumber = rs.getString("AccountNumber");
                     setVisible(false);
-                    new Transactions(AccountNumber,password);
+                    new Transactions(AccountNumber);
                 } else{
                     JOptionPane.showMessageDialog(null, "Enter Correct Username And Password");
                 }

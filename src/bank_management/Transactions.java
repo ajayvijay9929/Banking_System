@@ -9,14 +9,16 @@ import java.sql.ResultSet;
 public class Transactions extends JFrame implements ActionListener {
 
     String AccountNumber, facility, name, fname, dob, gender, email, marritalstatus, city, state, pincode, pan, aadhar;
-    JButton changePin, accountdetails, pay,logout;
+  public  JButton changePin, accountdetails, pay,logout,history,upprofile;
     String password, passwordString;;
 
-    Transactions(String AccountNumber, String password) {
+    Transactions(String AccountNumber) {
         this.AccountNumber = AccountNumber;
-        this.password = password;
         setTitle("Transaction Page");
         setLayout(null);
+
+       // Passwordcheck ps=new Passwordcheck();
+       //System.out.println( ps.passwordinputbox(AccountNumber));
 
         accountdetails = new JButton("Account Details");
         accountdetails.setBackground(Color.black);
@@ -26,11 +28,19 @@ public class Transactions extends JFrame implements ActionListener {
         accountdetails.addActionListener(this);
         add(accountdetails);
 
+        upprofile = new JButton("Update Profile");
+        upprofile.setBackground(Color.black);
+        upprofile.setForeground(Color.white);
+        upprofile.setFont(new Font("Ralway", Font.BOLD, 22));
+        upprofile.setBounds(300, 200, 300, 40);
+        upprofile.addActionListener(this);
+        add(upprofile);
+
         logout = new JButton("Logout");
         logout.setBackground(Color.black);
         logout.setForeground(Color.white);
         logout.setFont(new Font("Ralway", Font.BOLD, 22));
-        logout.setBounds(300, 200, 300, 40);
+        logout.setBounds(300, 250, 300, 40);
         logout.addActionListener(this);
         add(logout);
 
@@ -56,11 +66,12 @@ public class Transactions extends JFrame implements ActionListener {
         changePin.addActionListener(this);
         add(changePin);
 
-        JButton history = new JButton("History");
+         history = new JButton("History");
         history.setBackground(Color.black);
         history.setForeground(Color.white);
         history.setFont(new Font("Ralway", Font.BOLD, 22));
         history.setBounds(100, 300, 160, 40);
+        history.addActionListener(this);
         add(history);
 
         pay = new JButton("Quick Pay");
@@ -71,8 +82,8 @@ public class Transactions extends JFrame implements ActionListener {
         pay.addActionListener(this);
         add(pay);
 
-        setSize(1300, 820);
-        setLocation(130, 0);
+        setSize(750, 600);
+        setLocation(350, 70);
         getContentPane().setBackground(Color.white);
         setVisible(true);
     }
@@ -80,14 +91,23 @@ public class Transactions extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == changePin) {
             setVisible(false);
-            new PinChange(AccountNumber, password);}
+            new PinChange(AccountNumber);}
+        if (ae.getSource() == history) {
+            setVisible(false);
+            new THistory(AccountNumber,password);}
         if (ae.getSource() == logout) {
             setVisible(false);
             new Login();
         } else if (ae.getSource() == pay) {
                 setVisible(false);
                 new QuickPay(AccountNumber, password);
-        } else if (ae.getSource() == accountdetails) {
+        } else if(ae.getSource()==upprofile){
+                    if(passwordinputbox()){
+                         new UpdateProfile(AccountNumber);    
+                    }
+                   
+        } 
+        else if (ae.getSource() == accountdetails) {
             try {
                 Conn conn = new Conn();
                 ResultSet ars = conn.s.executeQuery("select * from signupThree where  AccountNumber = '" + AccountNumber + "'");
@@ -118,7 +138,7 @@ public class Transactions extends JFrame implements ActionListener {
                     aadhar = aprs.getString("aadharNo");
 
                 }
-                    if (passwordinputbox(password)) {
+                    if (passwordinputbox()) {
                         new accountDetails(AccountNumber, name, fname, dob, gender, email, marritalstatus, city,
                                 state,
                                 pincode, pan, aadhar, facility);
@@ -131,7 +151,20 @@ public class Transactions extends JFrame implements ActionListener {
         }
     }
 
-    boolean passwordinputbox(String password) {
+    boolean passwordinputbox() {
+        
+        try {
+            Conn connnn = new Conn();
+            ResultSet aprs = connnn.s
+                    .executeQuery("select * from login where AccountNumber = '" + AccountNumber + "'");
+            while (aprs.next()) {
+                password = aprs.getString("Password");
+                System.out.println(password);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         JPasswordField passwordField = new JPasswordField();
         int option = JOptionPane.showConfirmDialog(null, passwordField, "Enter password:",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -151,6 +184,6 @@ public class Transactions extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Transactions("", "");
+        new Transactions("");
     }
 }

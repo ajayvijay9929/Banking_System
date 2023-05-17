@@ -12,9 +12,9 @@ public class PinChange extends JFrame implements ActionListener {
     JButton back, change;
     JPasswordField repintextfield, pintextfield,oldpasswordtextfield;
     String oldpassword,AccountNumber;
-    PinChange(String AccountNumber,String oldpassword) {
+    PinChange(String AccountNumber) { // you deleted the old password
 
-        this.oldpassword=oldpassword;
+       // this.oldpassword=oldpassword;
         this.AccountNumber=AccountNumber;
         setTitle("Password Change Page");
         setLayout(null);
@@ -90,24 +90,24 @@ public class PinChange extends JFrame implements ActionListener {
                 }
                 Conn conn =new Conn();
                 String quary1="update login set password = '"+newpassword+"'  where AccountNumber='"+AccountNumber+"'" ;
-                String quary2="update signupThree set password = '"+newpassword+"'  where AccountNumber='"+AccountNumber+"'";
+                //String quary2="update signupThree set password = '"+newpassword+"'  where AccountNumber='"+AccountNumber+"'";
 
                 conn.s.executeUpdate(quary1);
-                conn.s.executeUpdate(quary2);
+              //  conn.s.executeUpdate(quary2);
                 JOptionPane.showMessageDialog(null, "PIN Successfully Changed");
                 setVisible(false);
-                new Transactions(AccountNumber,newpassword);
+                new Transactions(AccountNumber);
 
             } catch (Exception e) {
                 System.out.println(e);
             }
         } else {
             setVisible(false);
-            new Transactions(AccountNumber,oldpassword);
+            new Transactions(AccountNumber);
         }
     }
 
     public static void main(String[] args) {
-        new PinChange("","");
+        new PinChange("");
     }
 }
