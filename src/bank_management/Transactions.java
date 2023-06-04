@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 public class Transactions extends JFrame implements ActionListener {
 
     String AccountNumber, facility, name, fname, dob, gender, email, marritalstatus, city, state, pincode, pan, aadhar;
-  public  JButton changePin, accountdetails, pay,logout,history,upprofile;
+  public  JButton changePin, accountdetails, pay,logout,history,upprofile,ATMButton;
     String password, passwordString;;
 
     Transactions(String AccountNumber) {
@@ -81,6 +81,14 @@ public class Transactions extends JFrame implements ActionListener {
         pay.setBounds(100, 350, 160, 35);
         pay.addActionListener(this);
         add(pay);
+
+        ATMButton = new JButton("ATM Services");
+        ATMButton.setBackground(Color.black);
+        ATMButton.setForeground(Color.white);
+        ATMButton.setFont(new Font("Ralway", Font.BOLD, 20));
+        ATMButton.setBounds(300, 300, 300, 40);
+        ATMButton.addActionListener(this);
+        add(ATMButton);
 
         setSize(750, 600);
         setLocation(350, 70);

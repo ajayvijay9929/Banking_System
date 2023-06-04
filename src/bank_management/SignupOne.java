@@ -37,7 +37,7 @@ public class SignupOne extends JFrame implements ActionListener {
         setLayout(null);
 
         GRNumber grn = new GRNumber();
-        AccountNumber = grn.randomNumberGenerate();
+        AccountNumber = grn.GRNumber11();
         System.out.println(AccountNumber);
         acnumber = Long.toString(AccountNumber);
 

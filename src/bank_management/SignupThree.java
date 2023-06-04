@@ -9,6 +9,7 @@ import java.util.EventListener;
 import java.util.*;
 
 public class SignupThree extends JFrame implements ActionListener {
+    Conn conn = new Conn();
 
     JRadioButton b1, b2, b3, b4;
     JTextField passwordTextField, userTextField;
@@ -161,8 +162,26 @@ public class SignupThree extends JFrame implements ActionListener {
         int ulen = username.length();
         int plen = password.length();
         String facility = "";
+
+        // this is for services
+        try {
+            String quary="insert into services(AccountNumber) values('"+AccountNumber+"')";
+            conn.s.executeUpdate(quary);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         if (c1.isSelected()) {
-            facility = facility + " ATM Card ,";
+            facility = facility + "ATM Card ,";
+            try {
+                String quary1 = "update services set ATM='Yes' where AccountNumber= '" + AccountNumber + "'";
+                conn.s.executeUpdate(quary1);
+                new ATM_Service(AccountNumber);
+                
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
         }
         if (c2.isSelected()) {
             facility = facility + " Internet Banking ,";
@@ -180,6 +199,11 @@ public class SignupThree extends JFrame implements ActionListener {
             facility = facility + " E-Statement ,";
         }
 
+        /*
+         * faclity=faclity.substring(0,8)
+         * faclity.equlas("ATM Card")
+         */
+
         try {
             if (!b1.isSelected() && !b2.isSelected() && !b3.isSelected() && !b4.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Please Select Account Type");
@@ -195,7 +219,6 @@ public class SignupThree extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please Check Term And Conditions");
             } else {
 
-                Conn conn = new Conn();
                 String quary1 = "insert into signupThree values('" + formNo + "','" + AccountNumber + "','" + accountType + "','" + facility + "')";
                 conn.s.executeUpdate(quary1);
                 String quary2 = "insert into login values('" + AccountNumber + "','" + username + "','" + password
