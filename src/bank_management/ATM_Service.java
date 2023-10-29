@@ -26,6 +26,7 @@ public class ATM_Service {
 
     }
     public static void main(String[] args) {
+        new DisplayIMG();
         new ATM_Service("");
     }
 

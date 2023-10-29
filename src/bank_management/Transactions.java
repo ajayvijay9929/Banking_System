@@ -9,16 +9,17 @@ import java.sql.ResultSet;
 public class Transactions extends JFrame implements ActionListener {
 
     String AccountNumber, facility, name, fname, dob, gender, email, marritalstatus, city, state, pincode, pan, aadhar;
-  public  JButton changePin, accountdetails, pay,logout,history,upprofile,ATMButton;
-    String password, passwordString;;
+    public JButton changePin, accountdetails, pay, logout, history, upprofile, ATMButton, viewATMButton;
+    String password, passwordString;
+    PasswordManagement pm = new PasswordManagement();
 
     Transactions(String AccountNumber) {
         this.AccountNumber = AccountNumber;
         setTitle("Transaction Page");
         setLayout(null);
 
-       // Passwordcheck ps=new Passwordcheck();
-       //System.out.println( ps.passwordinputbox(AccountNumber));
+        // Passwordcheck ps=new Passwordcheck();
+        // System.out.println( ps.passwordinputbox(AccountNumber));
 
         accountdetails = new JButton("Account Details");
         accountdetails.setBackground(Color.black);
@@ -66,7 +67,7 @@ public class Transactions extends JFrame implements ActionListener {
         changePin.addActionListener(this);
         add(changePin);
 
-         history = new JButton("History");
+        history = new JButton("History");
         history.setBackground(Color.black);
         history.setForeground(Color.white);
         history.setFont(new Font("Ralway", Font.BOLD, 22));
@@ -90,6 +91,14 @@ public class Transactions extends JFrame implements ActionListener {
         ATMButton.addActionListener(this);
         add(ATMButton);
 
+        viewATMButton = new JButton("View ATM Card");
+        viewATMButton.setBackground(Color.black);
+        viewATMButton.setForeground(Color.white);
+        viewATMButton.setFont(new Font("Ralway", Font.BOLD, 20));
+        viewATMButton.setBounds(300, 350, 300, 40);
+        viewATMButton.addActionListener(this);
+        add(viewATMButton);
+
         setSize(750, 600);
         setLocation(350, 70);
         getContentPane().setBackground(Color.white);
@@ -99,26 +108,49 @@ public class Transactions extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == changePin) {
             setVisible(false);
-            new PinChange(AccountNumber);}
+            new PinChange(AccountNumber);
+        }
         if (ae.getSource() == history) {
             setVisible(false);
-            new THistory(AccountNumber,password);}
+            new THistory(AccountNumber);
+        }
         if (ae.getSource() == logout) {
             setVisible(false);
             new Login();
         } else if (ae.getSource() == pay) {
-                setVisible(false);
-                new QuickPay(AccountNumber, password);
-        } else if(ae.getSource()==upprofile){
-                    if(passwordinputbox()){
-                         new UpdateProfile(AccountNumber);    
-                    }
-                   
-        } 
-        else if (ae.getSource() == accountdetails) {
+            setVisible(false);
+            new QuickPay(AccountNumber);
+        } else if (ae.getSource() == upprofile) {
+            // if (passwordinputbox()) {
+            //     new UpdateProfile(AccountNumber);
+            // }
+
+        } else if (ae.getSource() == viewATMButton) {
+            new DisplayATM(AccountNumber);
+        } else if (ae.getSource() == accountdetails) {
+
+            JPasswordField passwordField = new JPasswordField();
+            int option = JOptionPane.showConfirmDialog(null, passwordField, "Enter password:",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (option == JOptionPane.OK_OPTION) {
+                // Get the password as a char array
+                char[] password1 = passwordField.getPassword();
+                // Convert the password to a String
+                passwordString = new String(password1);
+            }
+            else if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            }
+
+
+            if (!pm.checkPassword(AccountNumber, passwordString)) {
+                JOptionPane.showMessageDialog(null, "Incorrect Password");
+                return;
+            }
             try {
                 Conn conn = new Conn();
-                ResultSet ars = conn.s.executeQuery("select * from signupThree where  AccountNumber = '" + AccountNumber + "'");
+                ResultSet ars = conn.s
+                        .executeQuery("select * from signupThree where  AccountNumber = '" + AccountNumber + "'");
                 while (ars.next()) {
                     facility = ars.getString("Facility");
                 }
@@ -146,12 +178,10 @@ public class Transactions extends JFrame implements ActionListener {
                     aadhar = aprs.getString("aadharNo");
 
                 }
-                    if (passwordinputbox()) {
-                        new accountDetails(AccountNumber, name, fname, dob, gender, email, marritalstatus, city,
-                                state,
-                                pincode, pan, aadhar, facility);
-                    }
 
+                new accountDetails(AccountNumber, name, fname, dob, gender, email, marritalstatus, city,
+                        state,
+                        pincode, pan, aadhar, facility);
 
             } catch (Exception e) {
                 System.out.println(e);
@@ -159,37 +189,37 @@ public class Transactions extends JFrame implements ActionListener {
         }
     }
 
-    boolean passwordinputbox() {
-        
-        try {
-            Conn connnn = new Conn();
-            ResultSet aprs = connnn.s
-                    .executeQuery("select * from login where AccountNumber = '" + AccountNumber + "'");
-            while (aprs.next()) {
-                password = aprs.getString("Password");
-                System.out.println(password);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+    // boolean passwordinputbox() {
 
-        JPasswordField passwordField = new JPasswordField();
-        int option = JOptionPane.showConfirmDialog(null, passwordField, "Enter password:",
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        if (option == JOptionPane.OK_OPTION) {
-            // Get the password as a char array
-            char[] password1 = passwordField.getPassword();
-            // Convert the password to a String
-            passwordString = new String(password1);
-            if (password.equals(passwordString)) {
-                return true;
-            }
-            if (!password.equals(passwordString)) {
-                JOptionPane.showMessageDialog(null, "Incorrect Password");
-            }
-        }
-        return false;
-    }
+    //     try {
+    //         Conn connnn = new Conn();
+    //         ResultSet aprs = connnn.s
+    //                 .executeQuery("select * from login where AccountNumber = '" + AccountNumber + "'");
+    //         while (aprs.next()) {
+    //             password = aprs.getString("Password");
+    //             System.out.println(password);
+    //         }
+    //     } catch (Exception e) {
+    //         System.out.println(e);
+    //     }
+
+    //     JPasswordField passwordField = new JPasswordField();
+    //     int option = JOptionPane.showConfirmDialog(null, passwordField, "Enter password:",
+    //             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+    //     if (option == JOptionPane.OK_OPTION) {
+    //         // Get the password as a char array
+    //         char[] password1 = passwordField.getPassword();
+    //         // Convert the password to a String
+    //         passwordString = new String(password1);
+    //         if (password.equals(passwordString)) {
+    //             return true;
+    //         }
+    //         if (!password.equals(passwordString)) {
+    //             JOptionPane.showMessageDialog(null, "Incorrect Password");
+    //         }
+    //     }
+    //     return false;
+    // }
 
     public static void main(String[] args) {
         new Transactions("");

@@ -1,0 +1,119 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "DisplayATM",
+            "request": "launch",
+            "mainClass": "bank_management.DisplayATM",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "EncryptionData",
+            "request": "launch",
+            "mainClass": "bank_management.EncryptionData",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "DisplayIMG",
+            "request": "launch",
+            "mainClass": "bank_management.DisplayIMG",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "ATM_Service",
+            "request": "launch",
+            "mainClass": "bank_management.ATM_Service",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "ImageUploader",
+            "request": "launch",
+            "mainClass": "bank_management.ImageUploader",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "Login",
+            "request": "launch",
+            "mainClass": "bank_management.Login",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "PinChange",
+            "request": "launch",
+            "mainClass": "bank_management.PinChange",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "QuickPay",
+            "request": "launch",
+            "mainClass": "bank_management.QuickPay",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "SignupOne",
+            "request": "launch",
+            "mainClass": "bank_management.SignupOne",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "SignupThree",
+            "request": "launch",
+            "mainClass": "bank_management.SignupThree",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "SignupTwo",
+            "request": "launch",
+            "mainClass": "bank_management.SignupTwo",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "THistory",
+            "request": "launch",
+            "mainClass": "bank_management.THistory",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "Transactions",
+            "request": "launch",
+            "mainClass": "bank_management.Transactions",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "UpdateProfile",
+            "request": "launch",
+            "mainClass": "bank_management.UpdateProfile",
+            "projectName": "Banking_System_329e46ab"
+        },
+        {
+            "type": "java",
+            "name": "accountDetails",
+            "request": "launch",
+            "mainClass": "bank_management.accountDetails",
+            "projectName": "Banking_System_329e46ab"
+        }
+    ]
+}

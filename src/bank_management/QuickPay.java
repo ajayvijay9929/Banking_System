@@ -14,19 +14,19 @@ import javax.swing.*;
 
 public class QuickPay extends JFrame implements ActionListener {
 
+    PasswordManagement pm = new PasswordManagement();
     JLabel pageforquickpay, acNo, amount, remark;
     JTextField acnotext, amounttext, remarktext;
     JButton pay, cancel;
     long paybal, sebal;
-    String AccountNumber, passwordString, passstr, password, amount1 = null, ureacno, reacbal, seacbal, reacno = null,
+    String AccountNumber, passwordString, passstr, amount1 = null, ureacno, reacbal, seacbal, reacno = null,
             sedatabaseamount,
             redatabaseamount;
 
-    public QuickPay(String AccountNumber, String password) {
+    public QuickPay(String AccountNumber) {
         setTitle("Transaction Page");
         setLayout(null);
         this.AccountNumber = AccountNumber;
-        this.password = password;
 
         pageforquickpay = new JLabel("Quick Pay");
         pageforquickpay.setFont(new Font("Raleway", Font.BOLD, 20));
@@ -156,7 +156,7 @@ public class QuickPay extends JFrame implements ActionListener {
                 }
 
                 JPasswordField passwordField = new JPasswordField();
-                int pass = JOptionPane.showConfirmDialog(null, passwordField, "Enter pass",
+                int pass = JOptionPane.showConfirmDialog(null, passwordField, "Enter password",
                         JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE);
 
@@ -165,13 +165,15 @@ public class QuickPay extends JFrame implements ActionListener {
                     passwordString = new String(password);
                 }
 
-                ResultSet arsss = connn.s
-                        .executeQuery("select * from login where  AccountNumber = '" + AccountNumber + "'");
-                while (arsss.next()) {
-                    passstr = arsss.getString("password");
+                // ResultSet arsss = connn.s
+                // .executeQuery("select * from login where AccountNumber = '" + AccountNumber +
+                // "'");
+                // while (arsss.next()) {
+                // passstr = arsss.getString("password");
+                // // decript password
+                // }
 
-                }
-                if (!passstr.equals(passwordString)) {
+                if (!pm.checkPassword(AccountNumber, passwordString)) {
                     JOptionPane.showMessageDialog(null, "Incorrect Password");
                     setVisible(true);
                     return;
@@ -216,6 +218,6 @@ public class QuickPay extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new QuickPay("", "");
+        new QuickPay("");
     }
 }

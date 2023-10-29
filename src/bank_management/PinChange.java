@@ -9,6 +9,8 @@ import javax.swing.*;
 
 public class PinChange extends JFrame implements ActionListener {
 
+    CustomEncryption enc=new CustomEncryption();
+    PasswordManagement pm = new PasswordManagement();
     JButton back, change;
     JPasswordField repintextfield, pintextfield,oldpasswordtextfield;
     String oldpassword,AccountNumber;
@@ -76,8 +78,10 @@ public class PinChange extends JFrame implements ActionListener {
                 String uoldpassword = oldpasswordtextfield.getText();
                 String newpassword = pintextfield.getText();
                 String rnewpassword = repintextfield.getText();
+                
+                
                 int plen = newpassword.length();
-                if(!uoldpassword.equals(oldpassword)){
+                if(!pm.checkPassword(AccountNumber,uoldpassword)){
                     JOptionPane.showMessageDialog(null, "Please Enter Correct Old Password");
                     return;
                 }
@@ -89,6 +93,7 @@ public class PinChange extends JFrame implements ActionListener {
                     return;
                 }
                 Conn conn =new Conn();
+                newpassword=enc.customEncrypt(newpassword);
                 String quary1="update login set password = '"+newpassword+"'  where AccountNumber='"+AccountNumber+"'" ;
                 //String quary2="update signupThree set password = '"+newpassword+"'  where AccountNumber='"+AccountNumber+"'";
 

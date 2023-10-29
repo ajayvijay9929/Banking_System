@@ -10,13 +10,16 @@ import java.util.*;
 
 public class SignupThree extends JFrame implements ActionListener {
     Conn conn = new Conn();
+    CustomEncryption enc = new CustomEncryption();
+
+    // EncryptionData enData = new EncryptionData();
 
     JRadioButton b1, b2, b3, b4;
     JTextField passwordTextField, userTextField;
     String formNo, AccountNumber;
     JCheckBox tac, c1, c2, c4, c3, c5, c6;
 
-    SignupThree(String fno, String AccountNumber) {
+    SignupThree(String fno, String AccountNumber) throws Exception {
         formNo = fno;
         this.AccountNumber = AccountNumber;
         setTitle("Account Opening Application Form");
@@ -157,8 +160,17 @@ public class SignupThree extends JFrame implements ActionListener {
             accountType = "Recurring Deposit Account";
         }
 
+        // String tempPassword = passwordTextField.getText();
+        // try {
+        //     password = enData.enterEncrypt(tempPassword);
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+        // System.out.println(password);
+        
         String username = userTextField.getText();
         String password = passwordTextField.getText();
+        password = enc.customEncrypt(password);
         int ulen = username.length();
         int plen = password.length();
         String facility = "";
@@ -238,7 +250,7 @@ public class SignupThree extends JFrame implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         new SignupThree("", "");
     }
 }
