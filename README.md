@@ -23,6 +23,14 @@ This is Account Details page  *You will be required to enter your password befor
 This is ATM Card (click on View ATM Card)
 ![image](https://github.com/ajayvijay9929/Banking_System/assets/120326151/7a426fc2-f75c-45bf-ad11-8e8d212dbf76)
 
+This is Pin Change Page 
+![image](https://github.com/ajayvijay9929/Banking_System/assets/120326151/2faa08af-cec3-405e-bb4f-92d5e67e250d)
+
+This is Quick Pay page (using this we can send money)
+![image](https://github.com/ajayvijay9929/Banking_System/assets/120326151/4968ef3f-9016-4740-9faa-fe1728087911)
+
+This is History Page * we can see tranjaction history
+![image](https://github.com/ajayvijay9929/Banking_System/assets/120326151/1bc1fec1-7736-468a-95a4-1963ce10642f)
 
 
 
