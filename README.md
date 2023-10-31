@@ -1,5 +1,8 @@
 ## Getting Started
 
+![image](https://github.com/ajayvijay9929/Banking_System/assets/120326151/d54221c8-2953-4ff2-9e16-56bc26f17572)
+
+
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
 ## Folder Structure
