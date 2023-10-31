@@ -40,15 +40,15 @@ public class GRNumber {
     public long GRNumber3() {
         Random ran = new Random();
         CVV = 100L + ((long) (ran.nextDouble() * 900L));
-        Conn conn = new Conn();
-        String query = "select * from ATMCard where CVV = '" + CVV + "'";
-        try {
-            ResultSet rs = conn.s.executeQuery(query);
-            if (rs.next())
-             GRNumber3();
-        } catch (Exception ee) {
-            System.out.println(ee);
-        }
+        // Conn conn = new Conn();
+        // String query = "select * from ATMCard where CVV = '" + CVV + "'";
+        // try {
+        //     ResultSet rs = conn.s.executeQuery(query);
+        //     if (rs.next())
+        //      GRNumber3();
+        // } catch (Exception ee) {
+        //     System.out.println(ee);
+        // }
         return CVV;
     }
 

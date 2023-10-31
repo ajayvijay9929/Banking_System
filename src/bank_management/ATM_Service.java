@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 public class ATM_Service {
     String ATMCardNumber,CVV;
     long ATMCNumber,CVVN;
+    DateGeneration dg = new DateGeneration();
 
     ATM_Service(String AccountNumber) {
         GRNumber grn = new GRNumber();
@@ -15,10 +16,11 @@ public class ATM_Service {
         
         CVVN = grn.GRNumber3();
         CVV = Long.toString(CVVN);
+        String date =dg.validDate();
         System.out.println(CVV);
         try {
             Conn con=new Conn();
-            String quary="insert into ATMCard values('"+AccountNumber+"','"+ATMCardNumber+"','"+CVV+"')";
+            String quary="insert into ATMCard values('"+AccountNumber+"','"+ATMCardNumber+"','"+CVV+"' , '"+date+"')";
             con.s.executeUpdate(quary);
         } catch (Exception e) {
            System.out.println(e);

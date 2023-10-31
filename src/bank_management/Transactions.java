@@ -12,15 +12,12 @@ public class Transactions extends JFrame implements ActionListener {
     public JButton changePin, accountdetails, pay, logout, history, upprofile, ATMButton, viewATMButton;
     String password, passwordString;
     PasswordManagement pm = new PasswordManagement();
-
+    CheckServices cs =  new CheckServices();
     Transactions(String AccountNumber) {
         this.AccountNumber = AccountNumber;
         setTitle("Transaction Page");
         setLayout(null);
-
-        // Passwordcheck ps=new Passwordcheck();
-        // System.out.println( ps.passwordinputbox(AccountNumber));
-
+        
         accountdetails = new JButton("Account Details");
         accountdetails.setBackground(Color.black);
         accountdetails.setForeground(Color.white);
@@ -126,7 +123,9 @@ public class Transactions extends JFrame implements ActionListener {
             // }
 
         } else if (ae.getSource() == viewATMButton) {
-            new DisplayATM(AccountNumber);
+            String val = cs.Atm(AccountNumber);
+            if(val.equals("Yes")) new DisplayATM(AccountNumber);
+            else JOptionPane.showMessageDialog(null,"Atm Service is not Available");
         } else if (ae.getSource() == accountdetails) {
 
             JPasswordField passwordField = new JPasswordField();
