@@ -20,6 +20,11 @@ Main page
 This is Account Details page  *You will be required to enter your password before viewing your account details.
 ![image](https://github.com/ajayvijay9929/Banking_System/assets/120326151/0c0f523e-943a-47a9-8537-2db3d8ac8d2e)
 
+This is ATM Card (click on View ATM Card)
+![image](https://github.com/ajayvijay9929/Banking_System/assets/120326151/7a426fc2-f75c-45bf-ad11-8e8d212dbf76)
+
+
+
 
 
 
