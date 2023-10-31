@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.util.EventListener;
-import java.util.*;
 
 public class SignupThree extends JFrame implements ActionListener {
     Conn conn = new Conn();
@@ -160,14 +157,6 @@ public class SignupThree extends JFrame implements ActionListener {
             accountType = "Recurring Deposit Account";
         }
 
-        // String tempPassword = passwordTextField.getText();
-        // try {
-        //     password = enData.enterEncrypt(tempPassword);
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-        // System.out.println(password);
-        
         String username = userTextField.getText();
         String password = passwordTextField.getText();
         password = enc.customEncrypt(password);
@@ -175,26 +164,19 @@ public class SignupThree extends JFrame implements ActionListener {
         int plen = password.length();
         String facility = "";
 
-        // this is for services
-        try {
-            String quary="insert into services(AccountNumber) values('"+AccountNumber+"')";
-            conn.s.executeUpdate(quary);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        // if (c1.isSelected()) {
+        // facility = facility + "ATM Card ,";
+        // try {
+        // String quary1 = "update services set ATM='Yes' where AccountNumber= '" +
+        // AccountNumber + "'";
+        // conn.s.executeUpdate(quary1);
+        // new ATM_Service(AccountNumber);
 
-        if (c1.isSelected()) {
-            facility = facility + "ATM Card ,";
-            try {
-                String quary1 = "update services set ATM='Yes' where AccountNumber= '" + AccountNumber + "'";
-                conn.s.executeUpdate(quary1);
-                new ATM_Service(AccountNumber);
-                
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+        // } catch (Exception e) {
+        // System.out.println(e);
+        // }
 
-        }
+        // }
         if (c2.isSelected()) {
             facility = facility + " Internet Banking ,";
         }
@@ -211,11 +193,6 @@ public class SignupThree extends JFrame implements ActionListener {
             facility = facility + " E-Statement ,";
         }
 
-        /*
-         * faclity=faclity.substring(0,8)
-         * faclity.equlas("ATM Card")
-         */
-
         try {
             if (!b1.isSelected() && !b2.isSelected() && !b3.isSelected() && !b4.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Please Select Account Type");
@@ -231,15 +208,29 @@ public class SignupThree extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please Check Term And Conditions");
             } else {
 
-                String quary1 = "insert into signupThree values('" + formNo + "','" + AccountNumber + "','" + accountType + "','" + facility + "')";
-                conn.s.executeUpdate(quary1);
                 String quary2 = "insert into login values('" + AccountNumber + "','" + username + "','" + password
                         + "')";
                 conn.s.executeUpdate(quary2);
+                String quary1 = "insert into signupThree values('" + formNo + "','" + AccountNumber + "','"
+                        + accountType + "','" + facility + "')";
+                conn.s.executeUpdate(quary1);
                 String quary3 = "insert into balance values('" + AccountNumber + "','" + 1 + "','" + ""
                         + "')";
                 conn.s.executeUpdate(quary3);
+
+                // Atm
+                String quary4 = "insert into services(AccountNumber) values('" + AccountNumber + "')";
+                conn.s.executeUpdate(quary4);
+                if (c1.isSelected()) {
+                    facility = facility + "ATM Card ,";
+                        String quary5 = "update services set ATM='Yes' where AccountNumber= '" + AccountNumber + "'";
+                        conn.s.executeUpdate(quary5);
+                        new ATM_Service(AccountNumber);
+
+                }
+
                 setVisible(false);
+                OpenAccount.executeQuery();
                 JOptionPane.showMessageDialog(null, "Your Application Submited");
             }
 

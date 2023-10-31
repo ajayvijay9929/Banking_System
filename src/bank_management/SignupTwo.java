@@ -217,11 +217,7 @@ public class SignupTwo extends JFrame implements ActionListener {
             }
 
             else {
-                Conn c = new Conn();
-                String query = "insert into signupTwo values('" + fno + "','" + AccountNumber + "','" + religion + "','"
-                        + category + "','" + income + "','" + eQualification + "','" + occupation + "','" + panNo
-                        + "','" + aadharNo + "','" + sc + "','" + ea + "')";
-                c.s.executeUpdate(query);
+                new OpenAccount(fno,AccountNumber,religion,category,income,eQualification,occupation,panNo,aadharNo,sc,ea);
                 setVisible(false);
                 new SignupThree(fno, AccountNumber);
             }

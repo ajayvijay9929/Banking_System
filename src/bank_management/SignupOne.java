@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import java.awt.event.*;
-import java.beans.Visibility;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -263,11 +262,7 @@ public class SignupOne extends JFrame implements ActionListener {
             }
 
             else {
-                Conn c = new Conn();
-                String query = "insert into signup values('" + formno + "','" + AccountNumber + "','" + name + "','"
-                        + fname + "','" + dob + "','" + gender + "','" + email + "','" + marital + "','" + address
-                        + "','" + city + "','" + pincode + "','" + state + "')";
-                c.s.executeUpdate(query);
+                new OpenAccount(formno,AccountNumber,name,fname,dob,gender,email,marital,address,city,pincode,state);
                 setVisible(false);
                 new SignupTwo(formno, acnumber);
             }
